@@ -1,0 +1,50 @@
+const form = document.getElementById('form')
+const username = document.getElementById('username')
+const email = document.getElementById('email')
+const password = document.getElementById('password')
+const password2 = document.getElementById('password2')
+// Show error message 
+function showError(input, message) {
+  const formControl = input.parentElement
+  formControl.className = 'form-control error'
+  const small = formControl.querySelector('small')
+  small.innerText = message
+}
+// Show error message 
+function showSuccess(input, message) {
+  const formControl = input.parentElement
+  formControl.className = 'form-control success'
+}
+// Check email is valid
+function isEmailValid(email) {
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  return re.test(String(email).toLowerCase());
+}
+form.addEventListener('submit', (e) => {
+  e.preventDefault()
+  if (username.value === '') {
+    showError(username, 'Le nom d\'utilisateur est requis')
+  } else {
+    showSuccess(username)
+  }
+  if (email.value === '') {
+    showError(email, 'L\'email est requis')
+  }
+  else if (isEmailValid) {
+    showError(email, 'le format de l\'email n\'est pas valide')
+  }
+  else {
+    showSuccess(email)
+  }
+
+  if (password.value === '') {
+    showError(password, 'Le mot de passe est requis')
+  } else {
+    showSuccess(password)
+  }
+  if (password2.value === '') {
+    showError(password2, 'Le mot de passe 2 est requis ')
+  } else {
+    showSuccess(password2)
+  }
+})
